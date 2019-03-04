@@ -1,0 +1,18 @@
+.mCarouselItem {
+    height: 400px;
+}
+.mCarouselItemTitle{
+    size: 30px;
+    color: #FFFFFF;
+}
+.mCarouselItemParagraph{
+    size: 20px;
+    color: #FFFFFF;
+}
+.mCarouselItem-description {
+    background-color: #22222266;
+    text-align: start;
+    padding: 2%;
+    margin: auto;
+    overflow: auto;
+}
