@@ -83,6 +83,9 @@ p {
   -ms-transform: translateY(-50%);
   transform: translateY(-50%);
 }
+.ry-text-white {
+  color: #FFF;
+}
 
 .text_note {
   background-color: #FFF;
