@@ -1,0 +1,40 @@
+<div class="section-heading">
+  <h6>{{ 'CREATE_PAGE' | translate}}</h6>
+</div>
+<div >
+  <form class="form-horizontal col-lg-9">
+    <h5 class="form-group row ry_text-primary">{{ 'FORM_CREATE_PAGE' | translate }} </h5>
+    <div class="form-group row">
+      <label class="control-label col-sm-4" for="email">{{ 'SELECTECIONER_PAGE' | translate }}:</label>
+      <div class="col-sm-6">
+        <select class="form-control" #pageSelected name="pageSelected" id="pageSelected">
+          <option value="0" >{{ 'SELECTECIONER_PAGE' | translate }}</option>
+          <option *ngFor="let itemPage of AVAILABLE_PAGES" [value]="itemPage.code" >{{ itemPage.code }}</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="control-label col-sm-4" for="pwd">{{ 'SELECTECIONER_LANGUE' | translate }}:</label>
+      <div class="col-sm-6"> 
+        <select class="form-control" #langSelected name="langSelected" id="langSelected">
+            <option value="0" >{{ 'SELECTECIONER_LANGUE' | translate }}</option>
+          <option *ngFor="let lang of LANGS" [value]="lang.code" [selected]="lang === translate.currentLang">{{ lang.label }}</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group row"> 
+        <alert [type]="alertResponse.type" [dismissible]="alertResponse.dismissible" [dismissOnTimeout]="alertResponse.timeout" >{{ alertResponse.msg }}</alert>
+    </div>
+    <div class="form-group row"> 
+      <div class="col-sm-3"></div>
+      <div class="col-sm-offset-3">
+        <button type="reset" class="btn btn-dark">{{ 'ANNULER' | translate }}</button>
+        <button type="submit" class="btn btn-outline btn-primary" (click)="createPage(pageSelected.value, langSelected.value)" >{{ 'ENREGISTRER' | translate }}</button>
+      </div>
+      <div class="col-sm-3">
+          <img class="loading-img" src="assets/img/loading_circular.gif" [style.visibility]="SHOW_SAVE_LOADING ? 'visible' : 'hidden'" />
+      </div>
+    </div>
+  </form>
+</div>

@@ -30,6 +30,15 @@ import { StudyComponent } from './pages/public/study/study.component';
 import { WorkComponent } from './pages/public/work/work.component';
 import { ForumComponent } from './pages/public/forum/forum.component';
 import { ContactComponent } from './pages/public/contact/contact.component';
+import { DashboardComponent } from './pages/admin/dashboard/dashboard.component';
+import { EditPageComponent } from './pages/admin/edit-page/edit-page.component';
+import { ListPageComponent } from './pages/admin/list-page/list-page.component';
+import { CreatePageComponent } from './pages/admin/create-page/create-page.component';
+import { ActualiteComponent } from './pages/admin/actualite/actualite.component';
+import { AnnonceComponent } from './pages/admin/annonce/annonce.component';
+import { AdminFreeEvaluationComponent } from './pages/admin/admin-free-evaluation/admin-free-evaluation.component';
+import { ApplicationsComponent } from './pages/admin/applications/applications.component';
+import { AdminForumComponent } from './pages/admin/admin-forum/admin-forum.component';
 
 export const routes: Routes = [
   {
@@ -59,9 +68,21 @@ export const routes: Routes = [
       { path: 'contact', component: ContactComponent},
     ]
   },
-  { path: '', pathMatch: 'full', redirectTo: 'explorer' },
+  { path: '', pathMatch: 'full', redirectTo: 'explorer/home' },
   { path: 'login', component: LoginComponent },
-  { path: 'admin', component: AdminComponent, canActivate: [AuthGuard] },
+  { path: 'admin', component: AdminComponent, canActivate: [AuthGuard],
+    children: [
+      { path: '', pathMatch: 'full', redirectTo: 'dashboard' },
+      { path: 'dashboard', component: DashboardComponent},
+      { path: 'create-page', component: CreatePageComponent},
+      { path: 'edit-page', component: EditPageComponent},
+      { path: 'list-page', component: ListPageComponent},
+      { path: 'actualite', component: ActualiteComponent},
+      { path: 'annonce', component: AnnonceComponent},
+      { path: 'admin-free-evaluation', component: AdminFreeEvaluationComponent},
+      { path: 'applications', component: ApplicationsComponent},
+      { path: 'admin-forum', component: AdminForumComponent},
+    ] },
 ];
 
 export const routing: ModuleWithProviders = RouterModule.forRoot(routes, { useHash: true });

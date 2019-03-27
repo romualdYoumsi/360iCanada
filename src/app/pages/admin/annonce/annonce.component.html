@@ -1,0 +1,91 @@
+<div class="section-heading">
+  <h6>{{ 'ANNONCES' | translate}}</h6>
+</div>
+<div >
+  <p>You can do filter table data, in this case with observables and our <code>NgbHighlight</code> component used in Typeahead</p>
+  
+  <form>
+    <div class="form-group form-inline">
+      <input placeholder="Rechercher par nom" class="form-control ml-4" type="text" name="filter" #filter />
+      <button class="btn btn-primary" (click)="makeFilter(filter)">Rechercher</button>
+      
+      <button class="btn btn-success" (click)="openModalAddAnnonce(templateAddAnnonce)"> <i class="ic-alarm"></i> Nouvelle Annonce</button>
+      <ng-template #templateAddAnnonce>
+        <div class="modal-header">
+          <h4 class="modal-title pull-left">{{'NOUVELLE_ANNONCE' | translate}}</h4>
+          <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="login-form">
+            <alert type="danger" type="danger" dismissible="true" [style.visibility]="annonce.error.show ? 'visible' : 'hidden'">
+              {{ annonce.error.message }}
+            </alert>
+            <form action="#" method="post" class="form">     
+              <div class="form-group row">
+                <label class="control-label col-sm-12" for="langSelected">{{ 'SELECTECIONER_LANGUE' | translate }}:</label><br>
+                <div class="col-sm-12">
+                  <select class="form-control" [(ngModel)]="annonce.lang" name="langSelected" id="langSelected">
+                    <option value="0" >{{ 'SELECTECIONER_PAGE' | translate }}</option>
+                    <option *ngFor="let itemPage of LANGS" [value]="itemPage.code" >{{ itemPage.label }}</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="control-label col-sm-12" for="email">{{ 'TITLE' | translate }}:</label><br>
+                <div class="col-sm-12">
+                  <input type="text" [(ngModel)]="annonce.title" [ngModelOptions]="{standalone: true}" class="form-control" placeholder="{{'USERNAME' | translate}}" required="required">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="control-label col-sm-12" for="email">{{ 'CONTENU_ANNONCE' | translate }}:</label><br>
+                <div class="col-sm-12">
+                  <app-ngx-editor [(ngModel)]="annonce.content" name="editerHtmlContent" class="form-control" imageEndPoint="http://localhost/api.360icanada" resizer="basic" [config]="editorConfig" placeholder="{{ 'CONTENU_PAGE_WEB' | translate }}" [spellcheck]="true"></app-ngx-editor>
+                </div>
+              </div>
+              
+              <div class="form-group" #loginActionContainer>
+                <button type="submit" class="btn btn-primary pull-right" [style.visibility]="!annonce.is_logging ? 'visible' : 'hidden'" (click)="createAnnonce()" >{{'ENREGISTRER' | translate}}</button>
+                <button type="submit" class="btn btn-default pull-right" [style.visibility]="!annonce.is_logging ? 'visible' : 'hidden'" (click)="hideModal()" >{{'ANNULER' | translate}}</button>
+                <img class="loading-img" src="assets/img/loading_circular.gif" [style.visibility]="annonce.is_logging ? 'visible' : 'hidden'" />
+              </div>      
+            </form>
+          </div>
+        </div>
+      </ng-template>
+    </div>
+  </form>
+  
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Country</th>
+        <th scope="col">Area</th>
+        <th scope="col">Population</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let country of find_countries, index as i">
+        <th scope="row">{{ i + 1 }}</th>
+        <td>
+          <img [src]="'https://upload.wikimedia.org/wikipedia/commons/' + country.flag" class="mr-2" style="width: 20px">
+          <ngb-highlight [result]="country.name" [term]="filter.value"></ngb-highlight>
+        </td>
+        <td><ngb-highlight [result]="country.area | number" [term]="filter.value"></ngb-highlight></td>
+        <td><ngb-highlight [result]="country.population | number" [term]="filter.value"></ngb-highlight></td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="d-flex justify-content-between p-2">
+      <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize">
+      </ngb-pagination>
+    
+      <select class="custom-select" style="width: auto" [(ngModel)]="pageSize">
+        <option [ngValue]="2">2 items per page</option>
+        <option [ngValue]="4">4 items per page</option>
+        <option [ngValue]="6">6 items per page</option>
+      </select>
+    </div>
+</div>

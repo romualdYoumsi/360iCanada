@@ -1,0 +1,71 @@
+<div class="section-heading">
+  <h6>{{ 'EDIT_PAGE' | translate}}</h6>
+</div>
+<div >
+  <form class="form-horizontal col-lg-9">
+    <h5 class="form-group row ry_text-primary">{{ 'FORM_EDIT_PAGE' | translate }} </h5>
+    <div class="form-group row">
+      <label class="control-label col-sm-4" for="email">{{ 'SELECTECIONER_PAGE' | translate }}:</label>
+      <div class="col-sm-6">
+        <select class="form-control" #pageSelected name="pageSelected" id="pageSelected">
+          <option value="0" >{{ 'SELECTECIONER_PAGE' | translate }}</option>
+          <option *ngFor="let itemPage of AVAILABLE_PAGES" [value]="itemPage.code" >{{ itemPage.code }}</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="control-label col-sm-4" for="pwd">{{ 'SELECTECIONER_LANGUE' | translate }}:</label>
+      <div class="col-sm-6"> 
+        <select class="form-control" #langSelected name="langSelected" id="langSelected">
+            <option value="0" >{{ 'SELECTECIONER_LANGUE' | translate }}</option>
+          <option *ngFor="let lang of LANGS" [value]="lang.code" [selected]="lang === translate.currentLang">{{ lang.label }}</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group row"> 
+      <div class="col-sm-3"></div>
+      <div class="col-sm-offset-3">
+        <button type="reset" class="btn btn-dark">{{ 'ANNULER' | translate }}</button>
+        <button type="submit" class="btn btn-outline btn-primary" (click)="findInfosPage(pageSelected.value, langSelected.value)" >{{ 'MODIFIER' | translate }}</button>
+      </div>
+      <div class="col-sm-3">
+          <img class="loading-img" src="assets/img/loading_circular.gif" [style.visibility]="SHOW_LOADING ? 'visible' : 'hidden'" />
+      </div>
+    </div>
+  </form> <br>
+  <div>
+    
+    
+    <tabset [style.visibility]="SHOW_TABSET ? 'visible' : 'hidden'" type="pills pills-danger">
+      <tab heading="{{ 'PREVISUALISER' | translate }}">
+        <br>
+        <div id="prevEditerHtmlContent"></div>
+      </tab>
+      <tab heading="{{ 'EDITER' | translate }}">
+        
+        <br> <br>          
+        <form class="form-horizontal">
+          <p class="h4">Modification de la page</p>
+          <br>
+          <div class="row">
+            <div class="text col-sm-12">
+              <label>{{ 'CONTENU_PAGE_WEB' | translate }} :</label>
+              <app-ngx-editor [(ngModel)]="editerHtmlContent" name="editerHtmlContent" imageEndPoint="http://localhost/api.360icanada" resizer="basic" [config]="editorConfig" placeholder="{{ 'CONTENU_PAGE_WEB' | translate }}" [spellcheck]="true"></app-ngx-editor>
+            </div>
+          </div>
+          <br>
+          <div class="form-group row"> 
+            <div class="col-sm-1"></div>
+            <div class="col-sm-offset-3">
+              <button type="submit" class="btn btn-out-line btn-success" (click)="updatePage()" >{{ 'ENREGISTRER' | translate }}</button>
+            </div>
+            <div class="col-sm-3">
+                <img class="loading-img" src="assets/img/loading_circular.gif" [style.visibility]="SHOW_SAVE_LOADING ? 'visible' : 'hidden'" />
+            </div>
+          </div>
+        </form>
+      </tab>
+    </tabset>
+  </div>
+</div>
+

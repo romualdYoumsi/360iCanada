@@ -11,313 +11,348 @@
           <div class="top-header-content d-flex align-items-center justify-content-between">
             <!-- Logo -->
             <div class="logo">
-              <a href="index.html"><img src="assets/img/core-img/logo_small.png" alt=""></a>
+              <a href="index.html"><img src="assets/img/core-img/logo_small.jpg" alt=""></a>
             </div>
             
             <!-- Login Search Area -->
             <div class="login-search-area d-flex align-items-center">
-              <!-- Login -->
+              <!-- Login (click)="gotoLoginPage()"  -->
               <div class="login d-flex">
-                <a href="#" (click)="gotoLoginPage()">{{ 'LOGIN' | translate }}</a>
+                <a href="#" (click)="openModal(template)">{{ 'LOGIN' | translate }}</a>
+                <ng-template #template>
+                  <div class="modal-header">
+                    <h4 class="modal-title pull-left">{{'CONNEXION' | translate}}</h4>
+                    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <div class="login-form">
+                      <alert type="danger" type="danger" dismissible="true" [style.visibility]="internaute.error.show ? 'visible' : 'hidden'">
+                        {{ internaute.error.message }}
+                      </alert>
+                      <form action="#" method="post">
+                        <h2 class="text-center">{{'CONNEXION' | translate}}</h2>       
+                        <div class="form-group">
+                          <input type="text" [(ngModel)]="internaute.username" [ngModelOptions]="{standalone: true}" class="form-control" placeholder="{{'USERNAME' | translate}}" required="required">
+                        </div>
+                        <div class="form-group">
+                          <input type="password" [(ngModel)]="internaute.password" [ngModelOptions]="{standalone: true}" class="form-control" placeholder="{{'PASSWORD' | translate}}" required="required">
+                        </div>
+                        
+                        <div class="form-group" #loginActionContainer>
+                          <button type="submit" class="btn btn-primary btn-block" (click)="attemtLogin()" [style.visibility]="!internaute.is_logging ? 'visible' : 'hidden'" >{{'SE_CONNECTER' | translate}}</button>
+                          <img class="loading-img" src="assets/img/loading_circular.gif" [style.visibility]="internaute.is_logging ? 'visible' : 'hidden'" />
+                        </div>
+                        <div class="clearfix">
+                          <label class="pull-left checkbox-inline">
+                            <div class="custom-control custom-checkbox">
+                              <input type="checkbox" class="custom-control-input" id="defaultChecked2" checked>
+                              <label class="custom-control-label" for="defaultChecked2">{{'REMENBER_ME' | translate}}</label>
+                            </div>
+                          </label>
+                          <a href="#" class="pull-right">{{'FORGOT_PASSWORD' | translate}} ?</a>
+                        </div>        
+                      </form>
+                    </div>
+                  </div>
+                </ng-template>
               </div>
               <!-- Search Form -->
               <div class="search-form">
                 <form action="#" method="post">
-                  <input type="search" name="search" class="form-control" placeholder="Search">
+                  <input type="search" name="search" class="form-control" placeholder="{{ 'SEARCH' | translate }}">
                   <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
                 </form>
               </div>&nbsp;&nbsp; <span class="ry-text-white">{{ 'LANGUE' | translate }}&nbsp;:&nbsp;</span> 
               <select class="form-control" #langSelect (change)="setLang(langSelect.value)" name="lang" id="lang">
                 <option *ngFor="let lang of LANGS" [value]="lang.code" [selected]="lang === translate.currentLang">{{ lang.label }}</option>
                 <!-- <option value="en" [selected]="lang === translate.currentLang">English</option>
-                <option value="fr" [selected]="lang === translate.currentLang">Français</option> -->
-              </select> 
-              <!-- <select #langSelect (change)="setLang(langSelect.value)">
-                <option *ngFor="let lang of translate.getLangs()" [value]="lang" [selected]="lang === translate.currentLang">{{ lang }}</option>
-              </select> -->
+                  <option value="fr" [selected]="lang === translate.currentLang">Français</option> -->
+                </select> 
+                <!-- <select #langSelect (change)="setLang(langSelect.value)">
+                  <option *ngFor="let lang of translate.getLangs()" [value]="lang" [selected]="lang === translate.currentLang">{{ lang }}</option>
+                </select> -->
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-  
-  <!-- Navbar Area -->
-  <div class="newspaper-main-menu" id="stickyMenu">
-    <div class="classy-nav-container breakpoint-off">
-      <div class="container">
-        <!-- Menu -->
-        <nav class="classy-navbar justify-content-between" id="newspaperNav">
-          
-          <!-- Logo -->
-          <div class="logo">
-            <a href="index.html"><img src="assets/img/core-img/logo_small.png" alt=""></a>
-          </div>
-          
-          <!-- Navbar Toggler -->
-          <div class="classy-navbar-toggler">
-            <span class="navbarToggler"><span></span><span></span><span></span></span>
-          </div>
-          
+    
+    <!-- Navbar Area -->
+    <div class="newspaper-main-menu" id="stickyMenu">
+      <div class="classy-nav-container breakpoint-off">
+        <div class="container">
           <!-- Menu -->
-          <div class="classy-menu">
+          <nav class="classy-navbar justify-content-between" id="newspaperNav">
             
-            <!-- close btn -->
-            <div class="classycloseIcon">
-              <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
+            <!-- Logo -->
+            <div class="logo">
+              <a href="index.html"><img src="assets/img/core-img/logo_small.png" alt=""></a>
             </div>
             
-            <!-- Nav Start -->
-            <div class="classynav">
-              <ul>
-                <li class="active"><a href="index.html">Home</a></li>
-                <li><a href="#">Our Services</a>
-                  <div class="megamenu row">
-                    <ul class="single-mega col-2">
-                    </ul>
-                    <ul class="single-mega col-6">
-                      <li class="title"><a href="#" (click)="gotoWhatWeCanBringYouPage()">What we can bring you</a></li>
-                      <li class="title"><a href="#" (click)="gotoWorkingPage()">Working Method</a></li>
-                      <li class="title"><a href="#" (click)="gotoInitialRequestPage()">The Initial Request</a></li>
-                      <li class="title"><a href="#" (click)="gotoFeesAndTermsPayment()">Fees and Terms of Payment</a></li>
-                      <li class="title"><a href="#" (click)="gotoAssistanceServiceOnArrival()">Assistance Service on Arrival</a></li>
-                    </ul>
-                    <ul class="single-mega col-1">
-                    </ul>
-                    <div class="post-thumb col-3">
-                      <a href="#"><img src="assets/img/bg-img/primetravel_our-services.jpeg" alt=""></a>
+            <!-- Navbar Toggler -->
+            <div class="classy-navbar-toggler">
+              <span class="navbarToggler"><span></span><span></span><span></span></span>
+            </div>
+            
+            <!-- Menu -->
+            <div class="classy-menu">
+              
+              <!-- close btn -->
+              <div class="classycloseIcon">
+                <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
+              </div>
+              
+              <!-- Nav Start -->
+              <div class="classynav">
+                <ul>
+                  <li class="active"><a href="explorer/home">{{ 'HOME' | translate }}</a></li>
+                  <li><a href="#">{{ 'OUR_SERVICES' | translate }}</a>
+                    <div class="megamenu row">
+                      <ul class="single-mega col-2">
+                      </ul>
+                      <ul class="single-mega col-6">
+                        <li class="title"><a href="#" (click)="gotoWhatWeCanBringYouPage()">{{ 'WHAT_WE_CAN_BRING_YOU' | translate }}</a></li>
+                        <li class="title"><a href="#" (click)="gotoWorkingPage()">{{ 'WORKING_METHOD' | translate }}</a></li>
+                        <li class="title"><a href="#" (click)="gotoInitialRequestPage()">{{ 'INITIAL_REQUEST' | translate }}</a></li>
+                        <li class="title"><a href="#" (click)="gotoFeesAndTermsPayment()">{{ 'FEES_AND_TERMS_OF_PAYMENT' | translate }}</a></li>
+                        <li class="title"><a href="#" (click)="gotoAssistanceServiceOnArrival()">{{ 'ASSISTANCE_SERVICE_ON_ARRIVAL' | translate }}</a></li>
+                      </ul>
+                      <ul class="single-mega col-1">
+                      </ul>
+                      <div class="post-thumb col-3">
+                        <a href="#"><img src="assets/img/bg-img/primetravel_our-services.jpeg" alt=""></a>
+                      </div>
                     </div>
-                  </div>
-                </li>
-                <li><a href="#" (click)="gotoChooseUsPage()">Choose Us</a></li>
-                <li><a href="#">Immigration</a>
-                  <div class="megamenu row">
-                    <ul class="single-mega col-1">
-                    </ul>
-                    <ul class="single-mega col-4">
-                      <li class="title"><a href="#" (click)="gotoProvencialImmigration()">Provencial Immigration</a></li>
-                      <li class="title"><a href="#" (click)="gotoCanadianExperienceCLass()">Canadian Experience Class</a></li>
-                      <li class="title"><a href="#" (click)="gotoInitialRequestPage()">The Initial Request</a></li>
-                      <li class="title"><a href="#" (click)="gotoFeesAndTermsPayment()">Fees and Terms of Payment</a></li>
-                      <li class="title"><a href="#" (click)="gotoAssistanceServiceOnArrival()">Assistance Service on Arrival</a></li>
-                    </ul>
-                    <ul class="single-mega col-4">
-                      <li class="title"><h4><b>Express Entry Overview</b></h4></li>
-                      <li><a href="#" (click)="gotoEEImmigrationDraws()">Express Entry Immigration Draws</a></li>
-                      <li><a href="#" (click)="gotoEESkilledImmigration()">Express Entry For Skilled Immigration</a></li>
-                      <li><a href="#" (click)="gotoInvitationToApplyForPerResi()">Invitation to Apply for Permanent Residence</a></li>
-                      <li><a href="#" (click)="gotoBusinessImmigration()">Business Immigration</a></li>
-                      <li><a href="#" (click)="gotoImmigrationLevelsPlan()">Canada Immigration Levels Plan</a></li>
-                    </ul>
-                    <div class="post-thumb col-3">
-                      <a href="#"><img src="assets/img/bg-img/primetravel_immigration.png" alt=""></a>
+                  </li>
+                  <li><a href="#" (click)="gotoChooseUsPage()">{{ 'CHOOSE_US' | translate }}</a></li>
+                  <li><a href="#">{{ 'IMMIGRATION' | translate }}</a>
+                    <div class="megamenu row">
+                      <ul class="single-mega col-1">
+                      </ul>
+                      <ul class="single-mega col-4">
+                        <li class="title"><a href="#" (click)="gotoProvencialImmigration()">{{ 'PROVENTIAL_IMMIGRATION' | translate }}</a></li>
+                        <li class="title"><a href="#" (click)="gotoCanadianExperienceCLass()">{{ 'CANADIAN_EXPERIENCE_CLASS' | translate }}</a></li>
+                      </ul>
+                      <ul class="single-mega col-4">
+                        <li class="title"><h4><b>{{ 'EXPRESS_ENTRY_OVERVIEW' | translate }}</b></h4></li>
+                        <li><a href="#" (click)="gotoEEImmigrationDraws()">{{ 'EXPRESS_ENTRY_IMMIGRATION' | translate }}</a></li>
+                        <li><a href="#" (click)="gotoEESkilledImmigration()">{{ 'EXPRESS_ENTRY_FOR_SKILLED' | translate }}</a></li>
+                        <li><a href="#" (click)="gotoInvitationToApplyForPerResi()">{{ 'INVITATION_TO_APPLY_PERMANENT_RESIDENCE' | translate }}</a></li>
+                        <li><a href="#" (click)="gotoBusinessImmigration()">{{ 'BUSINESS_IMMIGRATION' | translate }}</a></li>
+                        <li><a href="#" (click)="gotoImmigrationLevelsPlan()">{{ 'CANADA_IMMIRATION_LEVELS_PLAN' | translate }}</a></li>
+                      </ul>
+                      <div class="post-thumb col-3">
+                        <a href="#"><img src="assets/img/bg-img/primetravel_immigration.png" alt=""></a>
+                      </div>
                     </div>
-                  </div>
-                </li>
-                <li><a href="#" (click)="gotoBusiness()">Business</a></li>
-                <li><a href="#" (click)="gotoStudy()">Study</a></li>
-                <li><a href="#" (click)="gotoWork()">Work</a></li>
-                <li><a href="#" (click)="gotoForum()">Forum</a></li>
-                <li><a href="#" (click)="gotoContact()">Contact</a></li>
+                  </li>
+                  <li><a href="#" (click)="gotoBusiness()">{{ 'BUSINESS' | translate }}</a></li>
+                  <li><a href="#" (click)="gotoStudy()">{{ 'STUDY' | translate }}</a></li>
+                  <li><a href="#" (click)="gotoWork()">{{ 'WORK' | translate }}</a></li>
+                  <li><a href="#" (click)="gotoForum()">{{ 'FORUM' | translate }}</a></li>
+                  <li><a href="#" (click)="gotoContact()">{{ 'CONTACT' | translate }}</a></li>
                   
-              </ul>
+                </ul>
+              </div>
+              <!-- Nav End -->
             </div>
-            <!-- Nav End -->
-          </div>
-        </nav>
-      </div>
-    </div>
-  </div>
-</header>
-<!-- ##### Header Area End ##### -->
-<div class="popular-news-area section-padding-50-50 ry-body">
-  <div class="container">
-    <div class="row">
-      <div class="col-12 col-lg-8 ry-body-content">
-        <router-outlet></router-outlet>
-      </div>
-      <div class="col-12 col-lg-4">
-        <div class="single-blog-post small-featured-post d-flex">
-          <div class="post-thumb">
-            <a href="#"><img src="assets/img/bg-img/primetravel_free-evaluation2.png" alt=""></a>
-          </div>
-          <div class="post-data">
-            <a href="#" (click)="gotoFreeEvaluationPage()" class="post-catagory">Free Evaluation</a>
-            <div class="post-meta">
-              <a href="#" class="post-body">
-                <p>Prior to representing our clients, we offer a FREE Canada Immigration evaluation</p>
-              </a>
-            </div>
-            <button (click)="gotoFreeEvaluationPage()" class="btn btn-dark btn-sm">Start Evaluation</button>
-          </div>
-        </div> 
-        
-        <div class="single-blog-post small-featured-post d-flex">
-          <div class="post-thumb">
-            <a href="#"><img src="assets/img/bg-img/19.jpg" alt=""></a>
-          </div>
-          <div class="post-data">
-            <a href="#" class="post-catagory">Finance</a>
-            <div class="post-meta">
-              <a href="#" class="post-title">
-                <h6>Pellentesque mattis arcu massa, nec fringilla turpis eleifend id.</h6>
-              </a>
-              <p class="post-date"><span>7:00 AM</span> | <span>April 14</span></p>
-            </div>
-          </div>
-        </div>
-        
-        <!-- Single Featured Post -->
-        <div class="single-blog-post small-featured-post d-flex">
-          <div class="post-thumb">
-            <a href="#"><img src="assets/img/bg-img/20.jpg" alt=""></a>
-          </div>
-          <div class="post-data">
-            <a href="#" class="post-catagory">Politics</a>
-            <div class="post-meta">
-              <a href="#" class="post-title">
-                <h6>Sed a elit euismod augue semper congue sit amet ac sapien.</h6>
-              </a>
-              <p class="post-date"><span>7:00 AM</span> | <span>April 14</span></p>
-            </div>
-          </div>
-        </div> <br>
-        <div class="single-contact-information mb-30">
-          <h4>Our Offices</h4>
-          <ul>
-            <li>> Cameroon, Douala</li>
-            <li>> Canada, Quebec</li>
-            <li>> United-States, Washingtong DC</li>
-          </ul>
-        </div>
-        <!-- Newsletter Widget -->
-        <div class="newsletter-widget">
-          <h4>Newsletter</h4>
-          <p>Subscribe to our newsletter to be the first informed of our news.</p>
-          <form action="#" method="post">
-            <input type="text" name="newsletter_name" placeholder="Name">
-            <input type="email" name="newsletter_email" placeholder="Email">
-            <button type="submit" class="btn w-100">Subscribe</button>
-          </form>
+          </nav>
         </div>
       </div>
     </div>
-  </div>
-</div>
-
-<!-- ##### Video Post Area Start ##### -->
-<div class="video-post-area bg-img bg-overlay" style="background-image: url(img/bg-img/bg1.jpg);">
-  <div class="container">
-    <div class="row justify-content-center">
-      <!-- Single Video Post -->
-      <div class="col-12 col-sm-6 col-md-4">
-        <div class="single-video-post">
-          <img src="assets/img/bg-img/video1.jpg" alt="">
-          <!-- Video Button -->
-          <div class="videobtn">
-            <a href="https://www.youtube.com/watch?v=5BQr-j3BBzU" class="videoPlayer"><i class="fa fa-play" aria-hidden="true"></i></a>
-          </div>
-        </div>
-      </div>
-      
-      <!-- Single Video Post -->
-      <div class="col-12 col-sm-6 col-md-4">
-        <div class="single-video-post">
-          <img src="assets/img/bg-img/video2.jpg" alt="">
-          <!-- Video Button -->
-          <div class="videobtn">
-            <a href="https://www.youtube.com/watch?v=5BQr-j3BBzU" class="videoPlayer"><i class="fa fa-play" aria-hidden="true"></i></a>
-          </div>
-        </div>
-      </div>
-      
-      <!-- Single Video Post -->
-      <div class="col-12 col-sm-6 col-md-4">
-        <div class="single-video-post">
-          <img src="assets/img/bg-img/video3.jpg" alt="">
-          <!-- Video Button -->
-          <div class="videobtn">
-            <a href="https://www.youtube.com/watch?v=5BQr-j3BBzU" class="videoPlayer"><i class="fa fa-play" aria-hidden="true"></i></a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- ##### Video Post Area End ##### -->
-<!-- ##### Footer Area Start ##### -->
-<footer class="footer-area">
-  
-  <!-- Main Footer Area -->
-  <div class="main-footer-area">
+  </header>
+  <!-- ##### Header Area End ##### -->
+  <div class="popular-news-area section-padding-50-50 ry-body">
     <div class="container">
       <div class="row">
-        
-        <!-- Footer Widget Area -->
-        <div class="col-12 col-sm-6 col-lg-6">
-          <div class="footer-widget-area mt-80">
-            <!-- Footer Logo -->
-            <div class="footer-logo">
-              <a href="index.html"><img src="assets/img/core-img/logo.png" alt=""></a>
+        <div class="col-12 col-lg-8 ry-body-content">
+          <router-outlet></router-outlet>
+        </div>
+        <div class="col-12 col-lg-4">
+          <div class="single-blog-post small-featured-post d-flex">
+            <div class="post-thumb">
+              <a href="#"><img src="assets/img/bg-img/primetravel_free-evaluation2.png" alt=""></a>
             </div>
-            <!-- List -->
-            <ul class="list">
-              <li><a href="mailto:info@360iCanada.org">Mail : info@360iCanada.org</a></li>
-              <li><a href="tel:+4352782883884">Phone : 0012022628660</a></li>
-              <li><a href="tel:+4352782883884">Whatsapp : 0012022628660</a></li>
+            <div class="post-data">
+              <a href="#" (click)="gotoFreeEvaluationPage()" class="post-catagory">{{ 'FREE_EVALUATION' | translate }}</a>
+              <div class="post-meta">
+                <a href="#" class="post-body">
+                  <p>Prior to representing our clients, we offer a FREE Canada Immigration evaluation</p>
+                </a>
+              </div>
+              <button (click)="gotoFreeEvaluationPage()" class="btn btn-primary btn-sm">{{ 'START_EVALUATION' | translate }}</button>
+            </div>
+          </div> 
+          
+          <div class="single-blog-post small-featured-post d-flex">
+            <div class="post-thumb">
+              <a href="#"><img src="assets/img/bg-img/19.jpg" alt=""></a>
+            </div>
+            <div class="post-data">
+              <a href="#" class="post-catagory">Finance</a>
+              <div class="post-meta">
+                <a href="#" class="post-title">
+                  <h6>Pellentesque mattis arcu massa, nec fringilla turpis eleifend id.</h6>
+                </a>
+                <p class="post-date"><span>7:00 AM</span> | <span>April 14</span></p>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Single Featured Post -->
+          <div class="single-blog-post small-featured-post d-flex">
+            <div class="post-thumb">
+              <a href="#"><img src="assets/img/bg-img/20.jpg" alt=""></a>
+            </div>
+            <div class="post-data">
+              <a href="#" class="post-catagory">Politics</a>
+              <div class="post-meta">
+                <a href="#" class="post-title">
+                  <h6>Sed a elit euismod augue semper congue sit amet ac sapien.</h6>
+                </a>
+                <p class="post-date"><span>7:00 AM</span> | <span>April 14</span></p>
+              </div>
+            </div>
+          </div> <br>
+          <div class="single-contact-information mb-30">
+            <h4>{{ 'OUR_OFFICES' | translate }}</h4>
+            <ul>
+              <li>> Cameroon, Douala</li>
+              <li>> Canada, Quebec</li>
+              <li>> United-States, Washingtong DC</li>
             </ul>
           </div>
-        </div>
-        
-        <!-- Footer Widget Area -->
-        <div class="col-12 col-sm-3 col-lg-3">
-          <div class="footer-widget-area mt-80">
-            <!-- Title -->
-            <h4 class="widget-title">Information</h4>
-            <!-- List -->
-            <ul class="list">
-              <li><a href="#">Press release</a></li>
-              <li><a href="#">Terms and Conditions</a></li>
-              <li><a href="#">Privacy Policy</a></li>
-              <li><a href="#">Contact Us</a></li>
-            </ul>
+          <!-- Newsletter Widget -->
+          <div class="newsletter-widget">
+            <h4>{{ 'NEWSLETTER' | translate }}</h4>
+            <p>{{ 'SUBSCRIBE_NEWSLETTER_PARAGRAPH' | translate }}</p>
+            <form action="#" method="post">
+              <input type="text" name="newsletter_name" placeholder="Name">
+              <input type="email" name="newsletter_email" placeholder="Email">
+              <button type="submit" class="btn w-100">{{ 'SUBSCRIBE' | translate }}</button>
+            </form>
           </div>
         </div>
-        
-        <!-- Footer Widget Area -->
-        <div class="col-12 col-sm-3 col-lg-3">
-          <div class="footer-widget-area mt-80">
-            <!-- Title -->
-            <h4 class="widget-title">Important Links</h4>
-            <!-- List -->
-            <ul class="list">
-              <li><a href="#">News</a></li>
-              <li><a href="#">Contact</a></li>
-              <li><a href="#">Sign Up</a></li>
-              <li><a href="#">Login</a></li>
-              <li><a href="#" (click)="gotoFreeEvaluationPage()">Start Free Evaluation</a></li>
-              <li><a href="#">Applcation Form</a></li>
-            </ul>
-          </div>
-        </div>
-        
       </div>
     </div>
   </div>
   
-  <!-- Bottom Footer Area -->
-  <div class="bottom-footer-area">
-    <div class="container h-100">
-      <div class="row h-100 align-items-center">
-        <div class="col-12">
-          <!-- Copywrite -->
-          <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-            Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>&nbsp;&nbsp;&nbsp;Design by Romuald YOUMSI <a href="mailto:contact@youremail.com">youmsijunior@gmail.com</a>
-            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-          </p>
+  <!-- ##### Video Post Area Start ##### -->
+  <div class="video-post-area bg-img bg-overlay" style="background-image: url(img/bg-img/bg1.jpg);">
+    <div class="container">
+      <div class="row justify-content-center">
+        <!-- Single Video Post -->
+        <div class="col-12 col-sm-6 col-md-4">
+          <div class="single-video-post">
+            <img src="assets/img/bg-img/video1.jpg" alt="">
+            <!-- Video Button -->
+            <div class="videobtn">
+              <a href="https://www.youtube.com/watch?v=5BQr-j3BBzU" class="videoPlayer"><i class="fa fa-play" aria-hidden="true"></i></a>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Single Video Post -->
+        <div class="col-12 col-sm-6 col-md-4">
+          <div class="single-video-post">
+            <img src="assets/img/bg-img/video2.jpg" alt="">
+            <!-- Video Button -->
+            <div class="videobtn">
+              <a href="https://www.youtube.com/watch?v=5BQr-j3BBzU" class="videoPlayer"><i class="fa fa-play" aria-hidden="true"></i></a>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Single Video Post -->
+        <div class="col-12 col-sm-6 col-md-4">
+          <div class="single-video-post">
+            <img src="assets/img/bg-img/video3.jpg" alt="">
+            <!-- Video Button -->
+            <div class="videobtn">
+              <a href="https://www.youtube.com/watch?v=5BQr-j3BBzU" class="videoPlayer"><i class="fa fa-play" aria-hidden="true"></i></a>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</footer>
-<!-- ##### Footer Area Start ##### -->  
+  <!-- ##### Video Post Area End ##### -->
+  <!-- ##### Footer Area Start ##### -->
+  <footer class="footer-area">
+    
+    <!-- Main Footer Area -->
+    <div class="main-footer-area">
+      <div class="container">
+        <div class="row">
+          
+          <!-- Footer Widget Area -->
+          <div class="col-12 col-sm-6 col-lg-6">
+            <div class="footer-widget-area mt-80">
+              <!-- Footer Logo -->
+              <div class="footer-logo">
+                <a href="index.html"><img src="assets/img/core-img/logo.jpg" alt=""></a>
+              </div>
+              <!-- List -->
+              <ul class="list">
+                <li><a href="mailto:info@360iCanada.org">{{ 'MAIL' | translate }} : info@360iCanada.org</a></li>
+                <li><a href="tel:+4352782883884">{{ 'PHONE' | translate }} : 0012022628660</a></li>
+                <li><a href="tel:+4352782883884">{{ 'WHATSAPP' | translate }} : 0012022628660</a></li>
+              </ul>
+            </div>
+          </div>
+          
+          <!-- Footer Widget Area -->
+          <div class="col-12 col-sm-3 col-lg-3">
+            <div class="footer-widget-area mt-80">
+              <!-- Title -->
+              <h4 class="widget-title">{{ 'INFORMATION' | translate }}</h4>
+              <!-- List -->
+              <ul class="list">
+                <li><a href="#">Press release</a></li>
+                <li><a href="#">Terms and Conditions</a></li>
+                <li><a href="#">Privacy Policy</a></li>
+                <li><a href="#">{{ 'CONTACT_US' | translate }}</a></li>
+              </ul>
+            </div>
+          </div>
+          
+          <!-- Footer Widget Area -->
+          <div class="col-12 col-sm-3 col-lg-3">
+            <div class="footer-widget-area mt-80">
+              <!-- Title -->
+              <h4 class="widget-title">{{ 'IMPORTANT_LINKS' | translate }}</h4>
+              <!-- List -->
+              <ul class="list">
+                <li><a href="#">{{ 'NEWS' | translate }}</a></li>
+                <li><a href="#">{{ 'CONTACT' | translate }}</a></li>
+                <li><a href="#">{{ 'LOGIN' | translate }}</a></li>
+                <li><a href="#" (click)="gotoFreeEvaluationPage()">{{ 'START_FREE_EVALUATION' | translate }}</a></li>
+                <li><a href="#">{{ 'APPLICATION_FORM' | translate }}</a></li>
+              </ul>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+    
+    <!-- Bottom Footer Area -->
+    <div class="bottom-footer-area">
+      <div class="container h-100">
+        <div class="row h-100 align-items-center">
+          <div class="col-12">
+            <!-- Copywrite -->
+            <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+              Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>&nbsp;&nbsp;&nbsp;Design by Romuald YOUMSI <a href="mailto:contact@youremail.com">youmsijunior@gmail.com</a>
+              <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <!-- ##### Footer Area Start ##### -->  
+  

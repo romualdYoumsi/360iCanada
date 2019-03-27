@@ -1,7 +1,3 @@
-<!-- <p>
-  admin works!
-  <a href="#" (click)="gotoHomePage()">Disconnect</a>
-</p> -->
 
 
 <!-- ##### Header Area Start ##### -->
@@ -15,21 +11,27 @@
           <div class="top-header-content d-flex align-items-center justify-content-between">
             <!-- Logo -->
             <div class="logo">
-              <a href="index.html"><img src="assets/img/core-img/logo.png" alt=""></a>
+              <a href="index.html"><img src="assets/img/core-img/logo_small.jpg" alt=""></a>
             </div>
             
+            <span class="ry-text-white">{{ 'HELLO' | translate }}, <b>{{ conUser.prenom | uppercase }}&nbsp;{{ conUser.nom | uppercase }}</b></span>
             <!-- Login Search Area -->
             <div class="login-search-area d-flex align-items-center">
-              <!-- Login -->
+              <!-- Login (click)="gotoLoginPage()"  -->
               <div class="login d-flex">
-                <a href="#" (click)="gotoLoginPage()">Sign Out</a>
-                <a href="#">Register</a>
+                <a href="#" (click)="openSignOutModal(template)">{{ 'SIGN_OUT' | translate }}</a>
+                <ng-template #template>
+                  <div class="modal-body text-center">
+                    <p>Voulez-vous vraiment vous déconnecter ?</p>
+                    <button type="button" class="btn btn-default" (click)="confirmSignOut()" >Yes</button>
+                    <button type="button" class="btn btn-primary" (click)="declineSingOut()" >No</button>
+                  </div>
+                </ng-template>
               </div>
-              <select class="form-control" name="lang" id="lang">
-                <option value="">Language</option>
-                <option value="">English</option>
-                <option value="">Français</option>
-              </select>
+              <span class="ry-text-white">{{ 'LANGUE' | translate }}&nbsp;:&nbsp;</span> 
+              <select class="form-control" #langSelect (change)="setLang(langSelect.value)" name="lang" id="lang">
+                <option *ngFor="let lang of LANGS" [value]="lang.code" [selected]="lang === translate.currentLang">{{ lang.label }}</option>
+              </select> 
             </div>
           </div>
         </div>
@@ -46,7 +48,7 @@
           
           <!-- Logo -->
           <div class="logo">
-            <a href="index.html"><img src="assets/img/core-img/logo.png" alt=""></a>
+            <a href="index.html"><img src="assets/img/core-img/logo_small.jpg" alt=""></a>
           </div>
           
           <!-- Navbar Toggler -->
@@ -65,55 +67,26 @@
             <!-- Nav Start -->
             <div class="classynav">
               <ul>
-                <li class="active"><a href="index.html">Dashboard</a></li>
-                <li><a href="#">Settings</a>
+                <li class="active"><a href="#" (click)="gotoDashboardPage()">{{ 'DASHBOARD' | translate }}</a></li>
+                <li><a href="#">{{ 'PAGES' | translate }}</a>
                   <div class="megamenu row">
-                    <ul class="single-mega col-2">
+                    <ul class="single-mega col-3">
                     </ul>
                     <ul class="single-mega col-6">
-                      <li class="title"><a href="index.html">What we can bring you</a></li>
-                      <li class="title"><a href="index.html">Working Method</a></li>
-                      <li class="title"><a href="index.html">The Initial Request</a></li>
-                      <li class="title"><a href="index.html">Fees and Terms of Payment</a></li>
-                      <li class="title"><a href="index.html">assistance service on arrival</a></li>
+                      <li class="title"><a href="#" (click)="gotoCreatePagePage()">{{ 'CREATE_PAGE' | translate }}</a></li>
+                      <li class="title"><a href="#" (click)="gotoEditPagePage()">{{ 'EDIT_PAGE' | translate }}</a></li>
+                      <li class="title"><a href="#" (click)="gotoListPagePage()">{{ 'LIST_PAGE' | translate }}</a></li>
                     </ul>
-                    <ul class="single-mega col-1">
+                    <ul class="single-mega col-3">
                     </ul>
-                    <div class="post-thumb col-3">
-                      <a href="#"><img src="assets/img/bg-img/primetravel_our-services.jpeg" alt=""></a>
-                    </div>
                   </div>
                 </li>
-                <li><a href="#">Choose Us</a></li>
-                <li><a href="#">Pages</a>
-                  <div class="megamenu row">
-                    <ul class="single-mega col-1">
-                    </ul>
-                    <ul class="single-mega col-4">
-                      <li class="title"><a href="index.html">Provencial Immigration</a></li>
-                      <li class="title"><a href="index.html">Canadian Experience Class</a></li>
-                      <li class="title"><a href="index.html">The Initial Request</a></li>
-                      <li class="title"><a href="index.html">Fees and Terms of Payment</a></li>
-                      <li class="title"><a href="index.html">assistance service on arrival</a></li>
-                    </ul>
-                    <ul class="single-mega col-4">
-                      <li class="title"><h4><b>Express Entry Overview</b></h4></li>
-                      <li><a href="index.html">Express Entry Immigration</a></li>
-                      <li><a href="index.html">Express Entry For Skilled Immigration</a></li>
-                      <li><a href="index.html">Comprehensive Ranking System</a></li>
-                      <li><a href="index.html">Invitation to Apply for Permanent Residence</a></li>
-                      <li><a href="index.html">Business Immigration</a></li>
-                      <li><a href="index.html">Canada Immigration Levels Plan</a></li>
-                    </ul>
-                    <div class="post-thumb col-3">
-                      <a href="#"><img src="assets/img/bg-img/primetravel_immigration.png" alt=""></a>
-                    </div>
-                  </div>
-                </li>
-                <li><a href="#">Applications</a></li>
-                <li><a href="#">Forum</a></li>
-                <li><a href="#">Live Chat</a></li>
-                  
+                <li><a href="#" (click)="gotoActualitePage()">{{ 'ACTUALITE' | translate }}</a></li>
+                <li><a href="#" (click)="gotoAnnoncePage()">{{ 'ANNONCES' | translate }}</a></li>
+                <li><a href="#" (click)="gotoFreeEvaluationPage()">{{ 'FREE_EVALUATION' | translate }}</a></li>
+                <li><a href="#" (click)="gotoApplicationsPage()">{{ 'APPLICATIONS' | translate }}</a></li>
+                <li><a href="#" (click)="gotoForumPage()">{{ 'FORUM' | translate }}</a></li>
+                
               </ul>
             </div>
             <!-- Nav End -->
@@ -124,10 +97,10 @@
   </div>
 </header>
 <!-- ##### Header Area End ##### -->
-<div class="popular-news-area section-padding-80-50">
+<div class="popular-news-area section-padding-50-50 ry-body">
   <div class="container">
     <div class="row">
-      <div class="col-12 col-lg-8">
+      <div class="col-12 col-lg-12 ry-body-content">
         <router-outlet></router-outlet>
       </div>
     </div>
@@ -136,63 +109,6 @@
 
 <!-- ##### Footer Area Start ##### -->
 <footer class="footer-area">
-  
-  <!-- Main Footer Area -->
-  <div class="main-footer-area">
-    <div class="container">
-      <div class="row">
-        
-        <!-- Footer Widget Area -->
-        <div class="col-12 col-sm-6 col-lg-6">
-          <div class="footer-widget-area mt-80">
-            <!-- Footer Logo -->
-            <div class="footer-logo">
-              <a href="index.html"><img src="assets/img/core-img/logo.png" alt=""></a>
-            </div>
-            <!-- List -->
-            <ul class="list">
-              <li><a href="mailto:contact@youremail.com">contact@360icanada.org</a></li>
-              <li><a href="tel:+4352782883884">+43 5278 2883 884</a></li>
-              <li><a href="http://www.360icanada.com">www.360icanada.com</a></li>
-            </ul>
-          </div>
-        </div>
-        
-        <!-- Footer Widget Area -->
-        <div class="col-12 col-sm-3 col-lg-3">
-          <div class="footer-widget-area mt-80">
-            <!-- Title -->
-            <h4 class="widget-title">Information</h4>
-            <!-- List -->
-            <ul class="list">
-              <li><a href="#">Press release</a></li>
-              <li><a href="#">Terms and Conditions</a></li>
-              <li><a href="#">Privacy Policy</a></li>
-              <li><a href="#">Contact Us</a></li>
-            </ul>
-          </div>
-        </div>
-        
-        <!-- Footer Widget Area -->
-        <div class="col-12 col-sm-3 col-lg-3">
-          <div class="footer-widget-area mt-80">
-            <!-- Title -->
-            <h4 class="widget-title">Important Links</h4>
-            <!-- List -->
-            <ul class="list">
-              <li><a href="#">News</a></li>
-              <li><a href="#">Contact</a></li>
-              <li><a href="#">Sign Up</a></li>
-              <li><a href="#">Login</a></li>
-              <li><a href="#">Applcation Form</a></li>
-            </ul>
-          </div>
-        </div>
-        
-      </div>
-    </div>
-  </div>
-  
   <!-- Bottom Footer Area -->
   <div class="bottom-footer-area">
     <div class="container h-100">

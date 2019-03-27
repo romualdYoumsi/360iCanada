@@ -86,6 +86,9 @@ p {
 .ry-text-white {
   color: #FFF;
 }
+.ry_text-primary {
+  color: #ee002d;
+}
 
 .text_note {
   background-color: #FFF;
@@ -99,7 +102,7 @@ a:focus {
   transition-duration: 500ms;
   text-decoration: none;
   outline: 0 solid transparent;
-  color: #1c1c1c;
+  color: #004B8F;
   font-weight: 500;
   font-size: 14px;
   color: #828282; }
@@ -244,7 +247,7 @@ img {
   background-color: #ffffff !important; }
 
 .bg-dark {
-  background-color: #000000 !important; }
+  background-color: #004B8F !important; }
 
 .bg-transparent {
   background-color: transparent !important; }
@@ -314,7 +317,7 @@ textarea:focus {
   -webkit-transition-duration: 500ms;
   transition-duration: 500ms; }
   #scrollUp:hover {
-    background-color: #000000; }
+    background-color: #004B8F; }
   @media only screen and (max-width: 767px) {
     #scrollUp {
       bottom: 30px;
@@ -340,7 +343,7 @@ textarea:focus {
     font-size: 14px;
     font-weight: 700;
     color: #ffffff;
-    background-color: #1c1c1c; }
+    background-color: #004B8F; }
 
 /* :: 4.0 Header Area */
 .header-area {
@@ -493,11 +496,11 @@ textarea:focus {
         color: #828282;
         font-weight: 500; }
         .header-area .newspaper-main-menu .classy-navbar .classynav > ul > li > a:hover, .header-area .newspaper-main-menu .classy-navbar .classynav > ul > li > a:focus {
-          color: #1c1c1c; }
+          color: #004B8F; }
       .header-area .newspaper-main-menu .classy-navbar .classynav > ul > li.active > a {
         position: relative;
         z-index: 1;
-        color: #1c1c1c; }
+        color: #004B8F; }
         .header-area .newspaper-main-menu .classy-navbar .classynav > ul > li.active > a::before {
           background-color: #f7f7f7;
           width: 100%;
@@ -547,7 +550,7 @@ textarea:focus {
           .hero-area .breaking-news-area .news-title p {
             font-size: 12px; } }
       .hero-area .breaking-news-area .news-title.title2 {
-        background-color: #152535; }
+        background-color: #004B8F; }
       @media only screen and (max-width: 767px) {
         .hero-area .breaking-news-area .news-title {
           min-width: 100px;
@@ -853,7 +856,7 @@ textarea:focus {
     .latest-comments-widget .single-comments .comments-text a {
       display: block;
       font-size: 16px;
-      color: #1c1c1c;
+      color: #004B8F;
       margin-bottom: 10px;
       line-height: 1.9; }
       .latest-comments-widget .single-comments .comments-text a span {
@@ -873,18 +876,19 @@ textarea:focus {
 .newsletter-widget {
   position: relative;
   z-index: 1;
-  background-color: #02031c;
+  background-color: #004B8F;
   padding: 60px 25px; }
   .newsletter-widget h4 {
     text-align: center;
-    color: #ee002d; }
+    color: #FFFFFF; }
   .newsletter-widget p {
     font-size: 12px;
-    text-align: center; }
+    text-align: center;
+    color: #DEDEDE; }
   .newsletter-widget form input {
     width: 100%;
     height: 50px;
-    background-color: #44425a;
+    background-color: #000a6d;
     font-size: 14px;
     font-style: italic;
     color: #fff;
@@ -959,7 +963,7 @@ textarea:focus {
       border-radius: 50%; }
   .blog-post-author .author-info a {
     display: block;
-    color: #000000;
+    color: #004B8F;
     font-size: 16px;
     margin-bottom: 15px; }
     .blog-post-author .author-info a span {
@@ -982,10 +986,10 @@ textarea:focus {
     text-transform: uppercase;
     background-color: #eff4f9;
     text-align: center;
-    color: #1c1c1c;
+    color: #004B8F;
     margin: 50px 0; }
     .pager a.active, .pager a:hover, .pager a:focus {
-      background-color: #1c1c1c;
+      background-color: #004B8F;
       color: #fff; }
     .pager a i {
       font-size: 16px; }
@@ -1100,7 +1104,7 @@ textarea:focus {
   position: relative;
   z-index: 1;
   width: 100%;
-  background-color: #02031c; }
+  background-color: #004B8F; }
   .footer-area .footer-widget-area {
     position: relative;
     z-index: 1; }
@@ -1118,7 +1122,7 @@ textarea:focus {
         .footer-area .footer-widget-area .list li a {
           display: block;
           padding: 5px 0;
-          color: rgba(255, 255, 255, 0.5); }
+          color: rgba(255, 255, 255); }
           .footer-area .footer-widget-area .list li a:hover, .footer-area .footer-widget-area .list li a:focus {
             color: #fff; }
   .footer-area .bottom-footer-area {
@@ -1127,10 +1131,10 @@ textarea:focus {
     width: 100%;
     height: 70px; }
     .footer-area .bottom-footer-area p {
-      color: rgba(255, 255, 255, 0.5);
+      color: rgba(255, 255, 255);
       margin-bottom: 0; }
       .footer-area .bottom-footer-area p a {
-        color: rgba(255, 255, 255, 0.5); }
+        color: rgba(255, 255, 255); }
         .footer-area .bottom-footer-area p a:hover, .footer-area .bottom-footer-area p a:focus {
           color: #fff; }
 
